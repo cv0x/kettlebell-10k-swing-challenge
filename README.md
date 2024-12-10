@@ -1,0 +1,1 @@
+# kettlebell-10k-swing-challenge
