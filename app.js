@@ -1,14 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const startButton = document.getElementById("start-timer");
-  const restartButton = document.getElementById("restart-timer");
-  const timerDisplay = document.getElementById("timer");
-  const circleContainer = document.getElementById("circle-container");
-  let timeLeft = 20 * 60;
+    const startButton = document.getElementById("start-timer");
+    const restartButton = document.getElementById("restart-timer");
+    const recordButton = document.getElementById('record-time');
+    const resetProgressButton = document.getElementById('reset-progress');
+    const timerDisplay = document.getElementById("timer");
+    const circleContainer = document.getElementById("circle-container");
+    let timeLeft = 20 * 60;
     let timerInterval;
     let circles = [];
     let timerRunning = false;
     let timerPaused = false;
-    const recordButton = document.getElementById('record-time');
+    let recordCounter = 0;
 
   function createCircles() {
     for (let i = 0; i < 20; i++) {
@@ -19,19 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  createCircles(); // Create circles on page load
-  updateCircles(0); // Initialize circles to be empty on page load
+  createCircles();
+  updateCircles(0);
 
   function updateTimerDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(
-      seconds
-    ).padStart(2, "0")}`;
+    timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
   function announceMinute(minutesLeft, frequency = 440) { // Default frequency to 440 for minutes beeps
-    if (minutesLeft > 0 && timeLeft <= 20*60 && timeLeft > 0) { // Beep every minute, but not at the end
+    if (minutesLeft > 0 && timeLeft <= 20 * 60 && timeLeft > 0) {
       // Play beep sound
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function beepCountdown() {
       if (countdown > 1) {
-        announceMinute(countdown, 440); // Use announceMinute for beep sound, default frequency
+        announceMinute(countdown); // Use announceMinute for beep sound, default frequency
         countdown--;
         setTimeout(beepCountdown, 1000); // Beep every second
       } else if (countdown === 1) {
@@ -133,14 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
           startButton.textContent = "Spustit Timer";
-          restartButton.style.display = "none";
-                    timerRunning = false;
-                    playFanfare();
-                    restartButton.style.display = 'inline-block'; // Show restart button after timer ends
-                }
-            }
-        }, 1000);
-    }
+          restartButton.style.display = "inline-block"; // Show restart button after timer ends
+          timerRunning = false;
+          playFanfare(); // Play fanfare when timer ends
+        }
+      }
+    }, 1000);
+  }
 
   function pauseTimer() {
     timerPaused = true;
@@ -200,4 +199,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   restartButton.addEventListener("click", restartTimer);
+
+    recordButton.addEventListener('click', () => {
+        const weekRows = document.querySelectorAll('.table .row:not(.header):not(.total)'); // Select week rows
+        const days = ['PO', 'ÚT', 'ST', 'ČT', 'PÁ', 'SO', 'NE'];
+        const totalCellsPerWeek = days.length;
+    
+        if (recordCounter < weekRows.length * totalCellsPerWeek) {
+            const weekIndex = Math.floor(recordCounter / totalCellsPerWeek);
+            const dayIndex = recordCounter % totalCellsPerWeek;
+            const rowToColor = weekRows[weekIndex];
+            const cellToColor = rowToColor.querySelectorAll('.cell')[dayIndex + 1]; // +1 to skip the "week" cell
+            if (cellToColor) {
+                cellToColor.style.backgroundColor = 'lightgreen';
+                recordCounter++;
+                localStorage.setItem('recordCounter', recordCounter.toString()); // Save to local storage
+            }
+        }
+    });
+
+    resetProgressButton.addEventListener('click', () => {
+        localStorage.removeItem('recordCounter');
+        recordCounter = 0;
+        // Reset cell colors
+        const cells = document.querySelectorAll('.table .cell');
+        cells.forEach(cell => {
+            cell.style.backgroundColor = '';
+        });
+    });
+
+
+    // Load recordCounter from local storage on page load
+    const storedCounter = localStorage.getItem('recordCounter');
+    if (storedCounter) {
+        recordCounter = parseInt(storedCounter);
+        const weekRows = document.querySelectorAll('.table .row:not(.header):not(.total)');
+        const days = ['PO', 'ÚT', 'ST', 'ČT', 'PÁ', 'SO', 'NE'];
+        const totalCellsPerWeek = days.length;
+
+        for (let i = 0; i < recordCounter; i++) {
+            if (i < weekRows.length * totalCellsPerWeek) {
+                const weekIndex = Math.floor(i / totalCellsPerWeek);
+                const dayIndex = i % totalCellsPerWeek;
+                const rowToColor = weekRows[weekIndex];
+                const cellToColor = rowToColor.querySelectorAll('.cell')[dayIndex + 1];
+                if (cellToColor) {
+                    cellToColor.style.backgroundColor = 'lightgreen';
+                }
+            }
+        }
+    }
 });

@@ -30,10 +30,12 @@ h1 {
 }
 
 .cell {
-    flex: 1;
+    flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
+    width: 12.5%; /* 1/8 of the row for 8 columns */
     padding: 10px;
     text-align: center;
     border: 1px solid black;
+    box-sizing: border-box; /* Include padding and border in width */
 }
 
 .header {
