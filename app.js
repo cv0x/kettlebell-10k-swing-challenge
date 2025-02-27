@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rowToColor = weekRows[weekIndex];
                 const cellToColor = rowToColor.querySelectorAll('.cell')[dayIndex + 1];
                 if (cellToColor) {
-                    cellToColor.style.backgroundColor = 'lightgreen';
+                    cellToColor.style.backgroundColor = "#ffd500";
                 }
             }
         }

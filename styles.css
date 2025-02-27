@@ -54,15 +54,62 @@ h1 {
     font-weight: bold;
 }
 
-.total-sum {
+#total-sum {
     font-size: 22px;
     font-weight: bold;
     margin-top: 20px;
 }
 
 .info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0px;
+    justify-content: space-between;
     font-size: 14px;
-    margin-top: 10px;
+}
+#reset-progress {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(135deg, #ffd500, #c0a000);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+#start-timer {
+    display: inline-block;
+    padding: 20px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(135deg, #5fff9c, #47fa6e);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+
+#restart-timer {
+    display: inline-block;
+    padding: 20px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(135deg, #e4081a, #79040e);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
 }
 
 #timer-container {
@@ -73,24 +120,27 @@ h1 {
 }
 
 #timer {
-    font-size: 2em;
+    font-size: 4em;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 #circle-container {
     display: flex;
-    width: 200px; /* Adjust as needed */
+    width: 500px;
     justify-content: space-between;
 }
 
 .circle {
-    width: 8px; /* Adjust as needed */
-    height: 8px; /* Adjust as needed */
-    background-color: black;
-    border-radius: 50%;
+    width: 25px; 
+    height: 25px; 
+    background-image: url('kettlebell.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .circle.active {
-    background-color: red; /* Highlight active circles */
+    background-image: url('kettlebellactive.png');
+
 }
