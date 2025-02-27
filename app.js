@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function announceMinute(minutesLeft, frequency = 440) { // Default frequency to 440 for minutes beeps
-    if (minutesLeft > 0 && timeLeft <= 20 * 60 && timeLeft > 0) {
+    if (timeLeft <= 20 * 60 && timeLeft > 0) { // corrected condition - beep always when timeLeft > 0 and within 20 min
       // Play beep sound
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const minutesLeft = Math.ceil(timeLeft / 60);
 
         if (timeLeft % 60 === 0 && timeLeft > 0) {
-          announceMinute(minutesLeft - 1); // Announce with beep every minute
+          announceMinute(minutesLeft); // Announce with beep every minute, corrected to use minutesLeft
           updateCircles(20 - minutesLeft + 1);
         }
 
@@ -177,8 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const minutesLeft = Math.ceil(timeLeft / 60);
 
-        if (timeLeft % 60 === 0 && timeLeft > 0) {
-          announceMinute(minutesLeft - 1); // Announce with beep every minute
+    if (timeLeft % 60 === 0 && timeLeft > 0) {
+      announceMinute(minutesLeft); // Announce with beep every minute, corrected to use minutesLeft
           updateCircles(20 - minutesLeft + 1);
         }
 
