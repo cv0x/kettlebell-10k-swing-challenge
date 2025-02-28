@@ -5,7 +5,7 @@ This project is a web application designed to help you track your progress in th
 
 ## How to use
 
-To use this application, simply open the `https://cv0x.github.io/kettlebell-10k-swing-challenge/` in your web browser.  You can then use the interface to track your progress in the Kettlebell 10,000 Swing Challenge.
+To use this application, simply open the [https://cv0x.github.io/kettlebell-10k-swing-challenge/](https://cv0x.github.io/kettlebell-10k-swing-challenge/) in your web browser.  You can then use the interface to track your progress in the Kettlebell 10,000 Swing Challenge.
 
 ## Files
 
