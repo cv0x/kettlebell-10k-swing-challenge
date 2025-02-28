@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
-          startButton.textContent = "Spustit Timer";
+          startButton.textContent = "Spustit";
           restartButton.style.display = "inline-block"; // Show restart button after timer ends
           timerRunning = false;
           playFanfare(); // Play fanfare when timer ends
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
-          startButton.textContent = "Spustit Timer";
+          startButton.textContent = "Spustit";
           restartButton.style.display = "none";
           timerRunning = false;
         }
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function restartTimer() {
     timerRunning = false;
     timerPaused = false;
-    startButton.textContent = "Spustit Timer";
+    startButton.textContent = "Spustit";
     restartButton.style.display = "none";
     clearInterval(timerInterval);
     timeLeft = 20 * 60;
