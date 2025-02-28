@@ -1,146 +1,150 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffd500;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffd500;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 25px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 28px;
+  color: #ffd500;
+  font-weight: bold;
 }
 
 .table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .row {
-    display: flex;
+  display: flex;
 }
 
 .cell {
-    flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
-    width: 12.5%; /* 1/8 of the row for 8 columns */
-    padding: 10px;
-    text-align: center;
-    border: 1px solid black;
-    box-sizing: border-box; /* Include padding and border in width */
+  flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
+  width: 12.5%; /* 1/8 of the row for 8 columns */
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid black;
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
 .header {
-    background: black;
-    color: white;
-    font-weight: bold;
+  background: black;
+  color: white;
+  font-weight: bold;
 }
 
 .week {
-    background: lightgray;
-    font-weight: bold;
+  background: lightgray;
+  font-weight: bold;
 }
 
 .total {
-    background: #f4f4f4;
-    font-weight: bold;
+  background: #f4f4f4;
+  font-weight: bold;
 }
 
 #total-sum {
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
 .info {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 0px;
-    justify-content: space-between;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0px;
+  font-size: 14px;
 }
 #reset-progress {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-    background: linear-gradient(135deg, #ffd500, #c0a000);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
+  display: flex;
+  position: relative;
+  margin-left: auto;
+  right: 0;
+  padding: 5px 5px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(135deg, #ffd500, #c0a000);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
 }
 #start-timer {
-    display: inline-block;
-    padding: 20px 30px;
-    font-size: 20px;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-    background: linear-gradient(135deg, #5fff9c, #47fa6e);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
+  display: inline-block;
+  padding: 20px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(135deg, #5fff9c, #47fa6e);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
 }
 
 #restart-timer {
-    display: inline-block;
-    padding: 20px 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-    background: linear-gradient(135deg, #e4081a, #79040e);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
+  display: inline-block;
+  padding: 20px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(135deg, #e4081a, #79040e);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
 }
 
 #timer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
 #timer {
-    font-size: 4em;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 4em;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 #circle-container {
-    display: flex;
-    width: 500px;
-    justify-content: space-between;
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
 }
 
 .circle {
-    width: 25px; 
-    height: 25px; 
-    background-image: url('kettlebell.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  background-image: url("kettlebell.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .circle.active {
-    background-image: url('kettlebellactive.png');
-
+  background-image: url("kettlebellactive.png");
 }

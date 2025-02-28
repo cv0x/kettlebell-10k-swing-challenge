@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.getElementById("start-timer");
   const restartButton = document.getElementById("restart-timer");
-  const resetProgressButton = document.getElementById('reset-progress');
+  const resetProgressButton = document.getElementById("reset-progress");
   const timerDisplay = document.getElementById("timer");
   const circleContainer = document.getElementById("circle-container");
   let timeLeft = 20 * 60;
@@ -31,10 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ).padStart(2, "0")}`;
   }
 
-  function announceMinute(minutesLeft, frequency = 440) { // Default frequency to 440 for minutes beeps
-    if (timeLeft <= 20 * 60 && timeLeft > 0) { // corrected condition - beep always when timeLeft > 0 and within 20 min
+  function announceMinute(minutesLeft, frequency = 440) {
+    // Default frequency to 440 for minutes beeps
+    if (timeLeft <= 20 * 60 && timeLeft > 0) {
+      // corrected condition - beep always when timeLeft > 0 and within 20 min
       // Play beep sound
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -44,7 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
       oscillator.type = "sine";
       oscillator.frequency.value = frequency;
       gainNode.gain.setValueAtTime(1, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.1
+      );
 
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.1);
@@ -52,8 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function playFanfare() {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const frequencies = [440, 550, 660, 550, 440, 550, 660, 550, 440,  550, 660, 550, 440]; // Example fanfare frequencies
+    const audioContext = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    const frequencies = [
+      440, 550, 660, 550, 440, 550, 660, 550, 440, 550, 660, 550, 440,
+    ]; // Example fanfare frequencies
     let startTime = audioContext.currentTime;
 
     frequencies.forEach((freq, index) => {
@@ -130,7 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
           updateCircles(20 - minutesLeft + 1);
         }
 
-        if (timeLeft <= 0) { // Changed from timeLeft < 0 to timeLeft <= 0
+        if (timeLeft <= 0) {
+          // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
           startButton.textContent = "Spustit Timer";
@@ -139,20 +149,23 @@ document.addEventListener("DOMContentLoaded", () => {
           playFanfare(); // Play fanfare when timer ends
 
           // Automate record function after timer ends
-          const weekRows = document.querySelectorAll('.table .row:not(.header):not(.total)');
-          const days = ['PO', 'ÚT', 'ST', 'ČT', 'PÁ', 'SO', 'NE'];
+          const weekRows = document.querySelectorAll(
+            ".table .row:not(.header):not(.total)"
+          );
+          const days = ["PO", "ÚT", "ST", "ČT", "PÁ", "SO", "NE"];
           const totalCellsPerWeek = days.length;
-      
+
           if (recordCounter < weekRows.length * totalCellsPerWeek) {
-              const weekIndex = Math.floor(recordCounter / totalCellsPerWeek);
-              const dayIndex = recordCounter % totalCellsPerWeek;
-              const rowToColor = weekRows[weekIndex];
-              const cellToColor = rowToColor.querySelectorAll('.cell')[dayIndex + 1]; // +1 to skip the "week" cell
-              if (cellToColor) {
-                  cellToColor.style.backgroundColor = 'lightgreen';
-                  recordCounter++;
-                  localStorage.setItem('recordCounter', recordCounter.toString()); // Save to local storage
-              }
+            const weekIndex = Math.floor(recordCounter / totalCellsPerWeek);
+            const dayIndex = recordCounter % totalCellsPerWeek;
+            const rowToColor = weekRows[weekIndex];
+            const cellToColor =
+              rowToColor.querySelectorAll(".cell")[dayIndex + 1]; // +1 to skip the "week" cell
+            if (cellToColor) {
+              cellToColor.style.backgroundColor = "lightgreen";
+              recordCounter++;
+              localStorage.setItem("recordCounter", recordCounter.toString()); // Save to local storage
+            }
           }
         }
       }
@@ -177,12 +190,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const minutesLeft = Math.ceil(timeLeft / 60);
 
-    if (timeLeft % 60 === 0 && timeLeft > 0) {
-      announceMinute(minutesLeft); // Announce with beep every minute, corrected to use minutesLeft
+        if (timeLeft % 60 === 0 && timeLeft > 0) {
+          announceMinute(minutesLeft); // Announce with beep every minute, corrected to use minutesLeft
           updateCircles(20 - minutesLeft + 1);
         }
 
-        if (timeLeft <= 0) { // Changed from timeLeft < 0 to timeLeft <= 0
+        if (timeLeft <= 0) {
+          // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
           startButton.textContent = "Spustit Timer";
@@ -218,35 +232,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartButton.addEventListener("click", restartTimer);
 
-    resetProgressButton.addEventListener('click', () => {
-        localStorage.removeItem('recordCounter');
-        recordCounter = 0;
-        // Reset cell colors
-        const cells = document.querySelectorAll('.table .cell');
-        cells.forEach(cell => {
-            cell.style.backgroundColor = '';
-        });
+  resetProgressButton.addEventListener("click", () => {
+    localStorage.removeItem("recordCounter");
+    recordCounter = 0;
+    // Reset cell colors
+    const cells = document.querySelectorAll(".table .cell");
+    cells.forEach((cell) => {
+      cell.style.backgroundColor = "";
     });
+  });
 
+  // Load recordCounter from local storage on page load
+  const storedCounter = localStorage.getItem("recordCounter");
+  if (storedCounter) {
+    recordCounter = parseInt(storedCounter);
+    const weekRows = document.querySelectorAll(
+      ".table .row:not(.header):not(.total)"
+    );
+    const days = ["PO", "ÚT", "ST", "ČT", "PÁ", "SO", "NE"];
+    const totalCellsPerWeek = days.length;
 
-    // Load recordCounter from local storage on page load
-    const storedCounter = localStorage.getItem('recordCounter');
-    if (storedCounter) {
-        recordCounter = parseInt(storedCounter);
-        const weekRows = document.querySelectorAll('.table .row:not(.header):not(.total)');
-        const days = ['PO', 'ÚT', 'ST', 'ČT', 'PÁ', 'SO', 'NE'];
-        const totalCellsPerWeek = days.length;
-
-        for (let i = 0; i < recordCounter; i++) {
-            if (i < weekRows.length * totalCellsPerWeek) {
-                const weekIndex = Math.floor(i / totalCellsPerWeek);
-                const dayIndex = i % totalCellsPerWeek;
-                const rowToColor = weekRows[weekIndex];
-                const cellToColor = rowToColor.querySelectorAll('.cell')[dayIndex + 1];
-                if (cellToColor) {
-                    cellToColor.style.backgroundColor = "#ffd500";
-                }
-            }
+    for (let i = 0; i < recordCounter; i++) {
+      if (i < weekRows.length * totalCellsPerWeek) {
+        const weekIndex = Math.floor(i / totalCellsPerWeek);
+        const dayIndex = i % totalCellsPerWeek;
+        const rowToColor = weekRows[weekIndex];
+        const cellToColor = rowToColor.querySelectorAll(".cell")[dayIndex + 1];
+        if (cellToColor) {
+          cellToColor.style.backgroundColor = "green";
         }
+      }
     }
+  }
 });
