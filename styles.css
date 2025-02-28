@@ -15,10 +15,24 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 5px;
+}
+
 h1 {
-  font-size: 28px;
+  
   color: #ffd500;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
   font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .table {
