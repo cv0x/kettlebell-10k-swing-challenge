@@ -24,7 +24,6 @@ body {
 }
 
 h1 {
-  
   color: #ffd500;
   position: absolute;
   top: 8%;
@@ -153,12 +152,36 @@ h1 {
 .circle {
   width: 25px;
   height: 25px;
-  background-image: url("kettlebell.png");
+  background-image: url("src/kettlebell.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .circle.active {
-  background-image: url("kettlebellactive.png");
+  background-image: url("src/kettlebellactive.png");
+}
+
+footer {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  padding: 10px 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+  vertical-align: middle;
+  margin: 0 150px 0 110px;
 }
