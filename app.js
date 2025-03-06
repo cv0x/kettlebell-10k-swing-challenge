@@ -165,11 +165,38 @@ document.addEventListener("DOMContentLoaded", () => {
               cellToColor.style.backgroundColor = "lightgreen";
               recordCounter++;
               localStorage.setItem("recordCounter", recordCounter.toString()); // Save to local storage
+              updateTotalSumDisplay();
             }
           }
         }
       }
     }, 1000);
+  }
+
+  function updateTotalSumDisplay() {
+    const totalSumElement = document.getElementById("total-sum");
+    if (totalSumElement) {
+      totalSumElement.textContent = calculateTotalColoredCells();
+    }
+    updateTotalSumDisplay(); // Initial update on load
+  }
+
+  function calculateTotalColoredCells() {
+    let totalSum = 0;
+    const weekRows = document.querySelectorAll(".table .row:not(.header):not(.total)");
+
+    weekRows.forEach(row => {
+        const cells = row.querySelectorAll(".cell:not(:first-child)"); // Skip the first cell (week name)
+        cells.forEach(cell => {
+            if (cell.style.backgroundColor === "lightgreen") {
+                const cellValue = parseInt(cell.textContent);
+                if (!isNaN(cellValue)) {
+                    totalSum += cellValue;
+                }
+            }
+        });
+    });
+    return totalSum;
   }
 
   function pauseTimer() {
@@ -240,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cells.forEach((cell) => {
       cell.style.backgroundColor = "";
     });
+    updateTotalSumDisplay(); // Update total sum after reset
   });
 
   // Load recordCounter from local storage on page load
@@ -263,5 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
+    updateTotalSumDisplay(); // Initial update on load
   }
 });
