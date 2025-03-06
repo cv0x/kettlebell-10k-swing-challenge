@@ -60,9 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function playFanfare() {
     const audioContext = new (window.AudioContext ||
       window.webkitAudioContext)();
-    const frequencies = [
-      440, 550, 660, 550, 440, 550, 660, 550, 440, 550, 660, 550, 440,
-    ]; // Example fanfare frequencies
+    const frequencies = [523, 659, 784, 880, 988, 1047, 880, 988, 1047, 1047]; // Example fanfare frequencies
     let startTime = audioContext.currentTime;
 
     frequencies.forEach((freq, index) => {
@@ -111,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         timerRunning = true;
         timerPaused = false;
-        startButton.textContent = "Pozastavit";
+        startButton.textContent = "Pause";
         startButton.disabled = false; // Re-enable start button after countdown
         restartButton.style.display = "none";
         timeLeft = 20 * 60;
@@ -143,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
-          startButton.textContent = "Spustit";
+          startButton.textContent = "Start";
           restartButton.style.display = "inline-block"; // Show restart button after timer ends
           timerRunning = false;
           playFanfare(); // Play fanfare when timer ends
@@ -152,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const weekRows = document.querySelectorAll(
             ".table .row:not(.header):not(.total)"
           );
-          const days = ["PO", "ÚT", "ST", "ČT", "PÁ", "SO", "NE"];
+          const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
           const totalCellsPerWeek = days.length;
 
           if (recordCounter < weekRows.length * totalCellsPerWeek) {
@@ -183,32 +181,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function calculateTotalColoredCells() {
     let totalSum = 0;
-    const weekRows = document.querySelectorAll(".table .row:not(.header):not(.total)");
+    const weekRows = document.querySelectorAll(
+      ".table .row:not(.header):not(.total)"
+    );
 
-    weekRows.forEach(row => {
-        const cells = row.querySelectorAll(".cell:not(:first-child)"); // Skip the first cell (week name)
-        cells.forEach(cell => {
-            if (cell.style.backgroundColor === "lightgreen") {
-                const cellValue = parseInt(cell.textContent);
-                if (!isNaN(cellValue)) {
-                    totalSum += cellValue;
-                }
-            }
-        });
+    weekRows.forEach((row) => {
+      const cells = row.querySelectorAll(".cell:not(:first-child)"); // Skip the first cell (week name)
+      cells.forEach((cell) => {
+        if (cell.style.backgroundColor === "lightgreen") {
+          const cellValue = parseInt(cell.textContent);
+          if (!isNaN(cellValue)) {
+            totalSum += cellValue;
+          }
+        }
+      });
     });
     return totalSum;
   }
 
   function pauseTimer() {
     timerPaused = true;
-    startButton.textContent = "Pokračovat";
+    startButton.textContent = "Continue";
     restartButton.style.display = "inline-block";
     clearInterval(timerInterval);
   }
 
   function resumeTimer() {
     timerPaused = false;
-    startButton.textContent = "Pozastavit";
+    startButton.textContent = "Pause";
     restartButton.style.display = "none";
     timerInterval = setInterval(() => {
       if (!timerPaused) {
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Changed from timeLeft < 0 to timeLeft <= 0
           clearInterval(timerInterval);
           timerDisplay.textContent = "00:00";
-          startButton.textContent = "Spustit";
+          startButton.textContent = "Start";
           restartButton.style.display = "none";
           timerRunning = false;
         }
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function restartTimer() {
     timerRunning = false;
     timerPaused = false;
-    startButton.textContent = "Spustit";
+    startButton.textContent = "Start";
     restartButton.style.display = "none";
     clearInterval(timerInterval);
     timeLeft = 20 * 60;
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const weekRows = document.querySelectorAll(
       ".table .row:not(.header):not(.total)"
     );
-    const days = ["PO", "ÚT", "ST", "ČT", "PÁ", "SO", "NE"];
+    const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
     const totalCellsPerWeek = days.length;
 
     for (let i = 0; i < recordCounter; i++) {
