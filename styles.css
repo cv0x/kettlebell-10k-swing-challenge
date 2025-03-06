@@ -51,6 +51,9 @@ h1 {
   text-align: center;
   border: 1px solid black;
   box-sizing: border-box; /* Include padding and border in width */
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
 }
 
 .header {
@@ -63,6 +66,15 @@ h1 {
   background: lightgray;
   font-weight: bold;
 }
+
+.row .cell:first-child,
+  .week {
+    font-size: 15px;
+    padding: 3px 10px;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
+  }
 
 .total {
   background: #f4f4f4;
@@ -81,6 +93,10 @@ h1 {
   width: 100%;
   margin-top: 0px;
   font-size: 14px;
+}
+
+.info .emom {
+  cursor: help;
 }
 #reset-progress {
   display: flex;
@@ -207,7 +223,7 @@ footer a {
   .row .cell:first-child,
   .week {
     font-size: 10px;
-    padding: 6px;
+    padding: 3px;
     word-break: break-word;
     white-space: normal;
     line-height: 1.2;
